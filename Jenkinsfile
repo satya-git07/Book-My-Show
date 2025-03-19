@@ -37,11 +37,10 @@ pipeline {
 
         
         stage("Docker Build & Push") {
-            steps {
+            steps { 
+                dir ('cd /var/lib/jenkins/workspace/bookmyshow-app')
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
-                        
-                        dir ('cd /var/lib/jenkins/workspace/bookmyshow-app')
                         sh "docker build -t bookmyshow ."
                         sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
                         sh "docker push satyadockerhub07/bookmyshow:tagname"
