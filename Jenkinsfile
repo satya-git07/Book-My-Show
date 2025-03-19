@@ -28,8 +28,8 @@ pipeline {
                         /opt/sonar-scanner-new/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner \
                             -Dsonar.projectKey="bookmyshow" \
                             -Dsonar.sources="." \
-                            -Dsonar.host.url="http://192.168.2.109:9000" \
-                            -Dsonar.login="squ_f434d42c4c118814a5caeb09c889804849a8d87f"
+                            -Dsonar.host.url="http://192.168.2.179:9000" \
+                            -Dsonar.login="squ_a30df14deb0651be3da03b112b282b7bcf1c8535"
                     """
                 }
             }
