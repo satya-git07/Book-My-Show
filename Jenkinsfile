@@ -40,7 +40,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
-                        sh "docker build -t bookmyshow /root/Book-My-Show/bookmyshow-app ."
+                        sh "cd /root/Book-My-Show/bookmyshow-app "
+                        sh "docker build -t bookmyshow ."
                         sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
                         sh "docker push satyadockerhub07/bookmyshow:tagname"
                     }
