@@ -40,6 +40,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
+                        sh 'ls -la ${WORKSPACE}'  // This will list all files in the current workspace
                         sh "cd /root/Book-My-Show/bookmyshow-app "
                         sh "docker build -t bookmyshow ."
                         sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
