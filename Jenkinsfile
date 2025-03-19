@@ -40,7 +40,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
-                        sh "/var/lib/jenkins/workspace/bookmyshow-app"
+                        sh "cd /var/lib/jenkins/workspace/bookmyshow-app"
+                        sh "ls"
                         sh "docker build -t bookmyshow ."
                         sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
                         sh "docker push satyadockerhub07/bookmyshow:tagname"
