@@ -96,7 +96,7 @@ stage("Docker Build & Push") {
                         dir('bookmyshow-app/k8s'){
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE} --project ${PROJECT_ID}"
-                        sh "kubectl apply -f deploy.yaml
+                        sh "kubectl apply -f deploy.yaml"
                         }
                     }
                 }
