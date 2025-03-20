@@ -38,7 +38,6 @@ pipeline {
         
         stage("Docker Build & Push") {
             steps { 
-                dir ('cd /var/lib/jenkins/workspace/bookmyshow-app')
                 script {
                     withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
                         sh "docker build -t bookmyshow ."
