@@ -81,7 +81,7 @@ stage("Docker Build & Push") {
             steps {
                 // Authenticate and apply Terraform changes
                 withCredentials([file(credentialsId: 'gcp-sa', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                     dir('bookmyshow-app/terraform'){
+                     dir('terraform'){
                        sh 'terraform apply -auto-approve'
                  }
                 }
