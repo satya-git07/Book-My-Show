@@ -44,6 +44,7 @@ pipeline {
                 // Change the directory to 'Book-My-Show/bookmyshow-app' and run Docker commands
                 dir('Book-My-Show/bookmyshow-app') {
                     // Run Docker build command in the specified directory
+                     sh "ls -l"
                     sh "docker build -f Dockerfile -t bookmyshow ."
                     
                     // Tag the Docker image
