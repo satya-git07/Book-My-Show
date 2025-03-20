@@ -35,18 +35,32 @@ pipeline {
             }
         }
 
-        
+      
+
         stage("Docker Build & Push") {
-            steps { 
-                script {
-                    withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
-                        sh "docker build -t bookmyshow ."
-                        sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
-                        sh "docker push satyadockerhub07/bookmyshow:tagname"
-                    }
+    steps { 
+        script {
+            withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
+                // Change the directory to 'Book-My-Show/bookmyshow-app' and run Docker commands
+                dir('Book-My-Show/bookmyshow-app') {
+                    // Run Docker build command in the specified directory
+                    sh "docker build -f Dockerfile -t bookmyshow ."
+                    
+                    // Tag the Docker image
+                    sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
+                    
+                    // Push the Docker image
+                    sh "docker push satyadockerhub07/bookmyshow:tagname"
                 }
             }
         }
+    }
+}
+
+
+
+
+        
         
           stage("TRIVY"){
                     steps{
