@@ -36,30 +36,28 @@ pipeline {
         }
 
       
-
-        stage("Docker Build & Push") {
-    steps { 
+stage("Docker Build & Push") {
+    steps {
         script {
-            withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {   
-                // Change the directory to 'Book-My-Show/bookmyshow-app' and run Docker commands
-                dir('Book-My-Show/bookmyshow-app') {
-                    // Run Docker build command in the specified directory
-                     sh "ls -l"
+            withDockerRegistry(credentialsId: 'docker-credentials', toolName: 'docker') {
+                // Make sure to use the correct directory where Dockerfile is located
+                dir('bookmyshow-app') {
+                    // Verify the Dockerfile exists in the correct location
+                    sh "ls -l"
+
+                    // Run the docker build command from this directory
                     sh "docker build -f Dockerfile -t bookmyshow ."
-                    
-                    // Tag the Docker image
+
+                    // Tag the built image
                     sh "docker tag bookmyshow:latest satyadockerhub07/bookmyshow:tagname"
-                    
-                    // Push the Docker image
+
+                    // Push the image to Docker Hub
                     sh "docker push satyadockerhub07/bookmyshow:tagname"
                 }
             }
         }
     }
 }
-
-
-
 
         
         
