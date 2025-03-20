@@ -50,7 +50,7 @@ pipeline {
         
           stage("TRIVY"){
                     steps{
-                        sh "trivy image satyadockerhub07/bookmyshow:tagname > trivyimage.txt" 
+                        sh "trivy image --timeout 20m satyadockerhub07/bookmyshow:tagname" 
                     }
                 }
 
