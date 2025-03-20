@@ -71,7 +71,9 @@ stage("Docker Build & Push") {
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
+                 dir('bookmyshow-app/terraform'){
                 sh 'terraform init'
+                 }
             }
         }
 
@@ -79,7 +81,9 @@ stage("Docker Build & Push") {
             steps {
                 // Authenticate and apply Terraform changes
                 withCredentials([file(credentialsId: 'gcp-sa', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
-                    sh 'terraform apply -auto-approve'
+                     dir('bookmyshow-app/terraform'){
+                       sh 'terraform apply -auto-approve'
+                 }
                 }
             }
         }
@@ -89,8 +93,11 @@ stage("Docker Build & Push") {
                 // Authenticate and deploy to GKE
                 withCredentials([file(credentialsId: 'gcp-sa', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                     script {
+                        dir('bookmyshow-app/k8s'){
                         sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
                         sh "gcloud container clusters get-credentials ${CLUSTER_NAME} --zone ${ZONE} --project ${PROJECT_ID}"
+                        sh "kubectl apply -f deploy.yaml
+                        }
                     }
                 }
             }
