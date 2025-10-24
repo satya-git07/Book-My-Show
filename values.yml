@@ -1,4 +1,11 @@
+app:
+  image:
+    repository: <+serviceVariables.dockername>
+    tag: <+serviceVariables.tag>
+  secret:
+    db_password: <+secrets.getValue("dbpassword")>
+  config:
+    log_level: <+env.variables.log_level>
+    api_url: https://example.com/api
+    app_mode: development
 
-
-secret:
-  db_password: <+serviceVariables.git> 
