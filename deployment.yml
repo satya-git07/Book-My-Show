@@ -1,21 +1,26 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: bms-app
-  labels:
-    app: bms
+  name: print-config-pod
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: bms
-  template:
-    metadata:
-      labels:
-        app: bms
-    spec:
-      containers:
-      - name: bms-container
-        image: kastrov/bms:latest  # Replace with your Docker image
-        ports:
-        - containerPort: 3000  # Replace with the port your app runs on
+  containers:
+    - name: print-container
+      image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          echo "===== application.json =====";
+          cat /etc/config/application.json;
+          echo "===== Secret Value =====";
+          echo $DB_PASSWORD;
+          sleep 3600
+      env:
+        - name: DB_PASSWORD
+          value: "{{ .Values.app.secret.db_password }}"
+      volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: app-config
