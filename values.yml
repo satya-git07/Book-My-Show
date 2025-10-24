@@ -1,6 +1,4 @@
-image:
-  repository: <+serviceVariables.dockername>
-  tag:  <+serviceVariables.tag>
+
 
 secret:
   db_password: <+serviceVariables.git>
