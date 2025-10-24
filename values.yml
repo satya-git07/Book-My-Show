@@ -5,7 +5,7 @@ app:
   secret:
     db_password: <+secrets.getValue("dbpassword")>
   config:
-    log_level: <+env.variables.log_level>
-    api_url: https://example.com/api
-    app_mode: development
+    log_level: <+serviceVariables.log_level>
+    api_url: <+serviceVariables.api_url>
+    app_mode: <+serviceVariables.app_mode>
 
