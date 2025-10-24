@@ -1,9 +1,9 @@
 app:
   image:
-    repository: <+serviceVariables.dockername>
+    repository: <+serviceVariables.image>
     tag: <+serviceVariables.tag>
   secret:
-    db_password: <+secrets.getValue("dbpassword")>
+    db_password: <+serviceVariables.git>
   config:
     log_level: <+serviceVariables.log_level>
     api_url: <+serviceVariables.api_url>
