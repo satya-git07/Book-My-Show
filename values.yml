@@ -1,4 +1,4 @@
 
 
 secret:
-  db_password: <+serviceVariables.git>
+  db_password: <+serviceVariables.git> 
