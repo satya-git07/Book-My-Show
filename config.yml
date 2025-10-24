@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  application.json: |
+    {
+      "log_level": "{{ .Values.app.config.log_level }}",
+      "api_url": "{{ .Values.app.config.api_url }}",
+      "app_mode": "{{ .Values.app.config.app_mode }}"
+    }
